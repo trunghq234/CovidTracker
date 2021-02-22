@@ -1,40 +1,43 @@
 import React from 'react'
-import { StyleSheet, Text, View, ImageBackground } from 'react-native'
+import { StyleSheet, Text, View, ImageBackground, ScrollView } from 'react-native'
 import AffectedMap from '../component/AffectedMap';
 import CasesDisplay from '../component/CasesDisplay';
 import CountrySelect from '../component/CountrySelect';
 
 export default function HomeScreen() {
   return (
-    <View style={styles.container}>
-      <ImageBackground 
-        source={require('../../assets/Background.png')} 
-        style={styles.image} >
-        <View style={styles.header}>
-          <View style={styles.headerContent}>
-            <Text style={styles.headerName}>Covid-19 Tracker</Text>
-            <Text style={styles.headerTitle}>Corona Virus Cases</Text>
-            
-            <Text style={styles.headerTime}>Last updated 1 hour ago</Text>
-          </View>
-        </View>
-        <View style={styles.content}>
-          <View style={styles.cards}>
-            <View style={styles.cardsRow}>
-              <CasesDisplay ></CasesDisplay>
-              <CasesDisplay ></CasesDisplay>
-            </View>
-            <View style={styles.cardsRow}>
-              <CasesDisplay ></CasesDisplay>
-              <CasesDisplay ></CasesDisplay>
+    <ScrollView showsVerticalScrollIndicator={false}>
+      <View style={styles.container}>
+        <ImageBackground 
+          source={require('../../assets/Background.png')} 
+          style={styles.image} >
+          <View style={styles.header}>
+            <View style={styles.headerContent}>
+              <Text style={styles.headerName}>Covid-19 Tracker</Text>
+              <Text style={styles.headerTitle}>Corona Virus Cases</Text>
+              
+              <Text style={styles.headerTime}>Last updated 1 hour ago</Text>
             </View>
           </View>
-          <View style={styles.map}>
-            <AffectedMap></AffectedMap>
+          <View style={styles.content}>
+            <View style={styles.cards}>
+              <View style={styles.cardsRow}>
+                <CasesDisplay title='COMFIRMED'></CasesDisplay>
+                <CasesDisplay title='ACTIVE'></CasesDisplay>
+              </View>
+              <View style={styles.cardsRow}>
+                <CasesDisplay title='RECOVERED'></CasesDisplay>
+                <CasesDisplay title='DECASED'></CasesDisplay>
+              </View>
+            </View>
+            <View style={styles.map}>
+              <AffectedMap style={{marginVertical: 20}}></AffectedMap>
+            </View>
           </View>
-        </View>
-      </ImageBackground>
-    </View>
+        </ImageBackground>
+      </View>
+    </ScrollView>
+    
   ) 
 }
 
@@ -84,6 +87,8 @@ const styles = StyleSheet.create({
     marginBottom: 20
   },
   map: {
-    marginHorizontal: 30
+    marginHorizontal: 30,
+    marginTop: 10,
+    marginBottom: 20
   }
 });

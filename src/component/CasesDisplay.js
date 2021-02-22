@@ -3,10 +3,10 @@ import { StyleSheet, Text, View } from 'react-native'
 import colors from '../Colors'
 import AntDesign from 'react-native-vector-icons/AntDesign'
 
-export default function CasesDisplay() {
+export default function CasesDisplay({title}) {
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>CONFIRMED</Text>
+      <Text style={styles.title}>{title}</Text>
       <View style={styles.numbers}>
         <Text style={styles.numberOfCases}>2368</Text>
         <AntDesign name="arrowup" color={'#EA5569'} size={14}/>

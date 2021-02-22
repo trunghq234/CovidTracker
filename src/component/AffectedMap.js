@@ -5,14 +5,14 @@ export default function AffectedMap() {
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Global Map</Text>
-      <Image source={require('../../assets/map.svg')} style={{flex: 1}}></Image>
+      
     </View>
   )
 }
 
 const styles = StyleSheet.create({
   container: {
-    height: 150,
+    height: 200,
     width: '100%',
     backgroundColor: "#FFFFFF",
     borderRadius: 8,
