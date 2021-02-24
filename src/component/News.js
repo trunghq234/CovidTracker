@@ -1,10 +1,20 @@
 import React from 'react'
-import { StyleSheet, Text, View, Image } from 'react-native'
+import { StyleSheet, Text, View, Image, Linking, Alert } from 'react-native'
 import { TouchableOpacity } from 'react-native-gesture-handler'
+import colors from '../Colors'
+import * as WebBrowser from 'expo-web-browser';
+
+function openLinK() {
+  try {
+    WebBrowser.openBrowserAsync('https://google.com');
+  } catch (err) {
+    alert(err);
+  }
+}
 
 export default function News() {
   return (
-    <TouchableOpacity>
+    <TouchableOpacity onPress={openLinK}>
       <View style={styles.container}>
         <View style={styles.content}>
           <Image 
@@ -25,7 +35,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     borderWidth: 1,
-    borderColor: '#A3ADBE',
+    borderColor: colors.text2,
     borderRadius: 8,
     height: 120,
     marginBottom: 20
@@ -46,23 +56,23 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   title: {
-    fontFamily: 'Montserrat',
+    //fontFamily: 'Montserrat',
     fontSize: 20, 
     fontWeight: '500',
     maxHeight: 44
   },
   preview: {
-    fontFamily: 'Monterrat',
+    //fontFamily: 'Monterrat',
     fontWeight: '400',
     fontSize: 14,
-    color: '#A3ADBE',
+    color: colors.text2,
     marginTop: 10    
   },
   info: {
-    fontFamily: 'Monterrat',
+    //fontFamily: 'Monterrat',
     fontWeight: '500',
     fontSize: 14,
-    color: '#A3ADBE',
+    color: colors.text2,
     marginHorizontal: 10
   }
 })

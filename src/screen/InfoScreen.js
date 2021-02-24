@@ -1,13 +1,16 @@
 import React from 'react'
-import { Image, StyleSheet, Text, TouchableOpacity, View, Linking } from 'react-native'
+import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import { SocialIcon } from 'react-native-elements'
-
+import colors from '../Colors'
+import * as WebBrowser from 'expo-web-browser';
 
 export default function InfoScreen() {
-  loadInBrowser = url => {
-    Linking
-    .openURL(url)
-    .catch(err => alert.error("Couldn't load page", err));
+  loadInBrowser = async url => {
+    try {
+      WebBrowser.openBrowserAsync(url);
+    } catch (err) {
+      alert("Couldn't load this page", err);
+    }
   };
 
   return (
@@ -34,12 +37,12 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: 'center',
-    backgroundColor: '#FFFFFF'
+    backgroundColor: colors.white
   },
   heading: {
     fontSize: 30,
     fontWeight: '700',
-    color: '#1D2C40',
+    color: colors.text,
     marginVertical: 30
   },
   image: {
@@ -50,7 +53,7 @@ const styles = StyleSheet.create({
   text: {
     fontWeight: '700',
     fontSize: 30,
-    color: '#EA5569',
+    color: colors.primary,
     margin: 20,
     shadowColor: "#000",
     shadowOffset: {

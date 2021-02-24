@@ -2,6 +2,7 @@ import React from 'react'
 import { StyleSheet, Text, View } from 'react-native'
 import { ScrollView } from 'react-native-gesture-handler'
 import News from '../component/News'
+import colors from '../Colors';
 
 export default function NewsScreen() {
   return (
@@ -24,12 +25,12 @@ export default function NewsScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#FFFFFF'
+    backgroundColor: colors.white
   },
   title: {
     fontSize: 26, 
     fontWeight: '700',
-    color: '#1D2C40',
+    color: colors.text,
     marginVertical: 20,
     marginHorizontal: 30
   },

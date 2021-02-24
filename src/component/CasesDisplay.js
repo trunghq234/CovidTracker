@@ -23,7 +23,7 @@ const styles = StyleSheet.create({
   container: {
     height: 150,
     width: 140,
-    backgroundColor: "#FFFFFF",
+    backgroundColor: colors.white,
     borderRadius: 8,
     shadowColor: "#000",
     shadowOffset: {
@@ -35,7 +35,7 @@ const styles = StyleSheet.create({
     elevation: 5,
   },
   title: {
-    fontFamily: 'Montserrat',
+    //fontFamily: 'Montserrat',
     fontSize: 16,
     fontWeight: '600',
     color: "#A3ADBE",
@@ -47,14 +47,14 @@ const styles = StyleSheet.create({
     alignItems: 'baseline'
   },
   numberOfCases: {
-    fontFamily: 'Montserrat',
+    //fontFamily: 'Montserrat',
     fontSize: 20,
     fontWeight: '600',
     color: "#EA5569",
     marginHorizontal: 10
   },
   numberOfChanges: {
-    fontFamily: 'Montserrat',
+    //fontFamily: 'Montserrat',
     fontSize: 16,
     fontWeight: '500',
     color: "#EA5569",

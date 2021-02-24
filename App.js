@@ -31,8 +31,10 @@ export default function App() {
                   iconName = focused ? 'ios-newspaper-sharp' : 'ios-newspaper-outline';
                 } else if (route.name === 'Health') {
                   iconName = focused ? 'ios-heart-sharp' : 'ios-heart-outline';
+                  size = 28;
                 } else if (route.name === 'Info') {
                   iconName = focused ? 'ios-information-circle' : 'ios-information-circle-outline';
+                  size = 30;
                 }
                 
                 return <Ionicons name={iconName} size={size} color={color} />;

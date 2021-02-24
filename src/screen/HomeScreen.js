@@ -3,10 +3,11 @@ import { StyleSheet, Text, View, ImageBackground, ScrollView } from 'react-nativ
 import AffectedMap from '../component/AffectedMap';
 import CasesDisplay from '../component/CasesDisplay';
 import CountrySelect from '../component/CountrySelect';
+import colors from '../Colors';
 
 export default function HomeScreen() {
   return (
-    <ScrollView showsVerticalScrollIndicator={false}>
+    <ScrollView showsVerticalScrollIndicator={false} style={{backgroundColor: colors.white}}>
       <View style={styles.container}>
         <ImageBackground 
           source={require('../../assets/Background.png')} 
@@ -43,7 +44,7 @@ export default function HomeScreen() {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    flex: 1
   },
   image: {
     flex: 1
@@ -59,21 +60,21 @@ const styles = StyleSheet.create({
   headerName: {
     fontSize: 18,
     fontWeight: '500',
-    color: '#FFFFFF',
+    color: colors.white,
   },
   headerTitle: {
     fontSize: 28, 
     fontWeight: '500',
-    color: '#FFFFFF',
+    color: colors.white,
     marginVertical: 8,
   },
   headerTime: {
     fontSize: 14,
     fontWeight: '400',
-    color: '#FFFFFF',
+    color: colors.white,
   },
   content: {
-    backgroundColor: "#FFFFFF",
+    backgroundColor: colors.white,
     flex: 1
   },
   cards: {
