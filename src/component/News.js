@@ -4,28 +4,48 @@ import { TouchableOpacity } from 'react-native-gesture-handler'
 import colors from '../Colors'
 import * as WebBrowser from 'expo-web-browser';
 
-function openLinK() {
+function openLinK(url) {
   try {
-    WebBrowser.openBrowserAsync('https://google.com');
+    WebBrowser.openBrowserAsync(url);
   } catch (err) {
     alert(err);
   }
 }
 
-export default function News() {
+function displayDateDiff(pubDate) {
+  var now = Date.now();
+  var diff = now - pubDate, sign = diff < 0 ? - 1 : 1, milliseconds, seconds, minutes, hours, days;
+  diff /= sign; // or diff=Math.abs(diff);
+  diff = (diff - (milliseconds = diff % 1000)) / 1000;
+  diff = (diff - (seconds = diff % 60)) / 60;
+  diff = (diff - (minutes = diff % 60)) / 60;
+  days = (diff - (hours = diff % 24)) / 24;
+  //console.log(diff)
+  console.log(minutes)
+  if (days !== 0) {
+    return days;
+  } else if (hours !== 0) {
+    return hours;
+  } else if (minutes !== 0) {
+    return minutes;
+  } else if (milliseconds !== 0) {
+    return milliseconds;
+  }
+}
+export default function News({ news }) {
   return (
-    <TouchableOpacity onPress={openLinK}>
+    <TouchableOpacity onPress={() => openLinK(news.link)}>
       <View style={styles.container}>
         <View style={styles.content}>
           <Image 
-            source={{uri: 'https://ichef.bbci.co.uk/news/976/cpsprodpb/14BF2/production/_117087948_codogno.jpg'}}
+            source={{uri: news.urlToImage}}
             style={styles.image}></Image>
           <View style={styles.text}>
-            <Text numberOfLines={2} style={styles.title}>Coronavirus: What Europeans have learned from a year of pandemic</Text>
-            <Text numberOfLines={2} style={styles.preview}>From the first case diagnosed a year ago at a hospital in northern Italy to the empty shops, restaurants and stadiums of Europe's cities, the lives of Europeans have been changed forever.</Text>
+            <Text numberOfLines={2} style={styles.title}>{ news.title }</Text>
+            <Text numberOfLines={3} style={styles.preview}>{ news.content }</Text>
           </View>
         </View>
-        <Text style={styles.info}>BBC News - 10 mins ago</Text>
+        <Text style={styles.info}>Source: { news.reference }</Text>
       </View>
     </TouchableOpacity>
   )
@@ -38,7 +58,8 @@ const styles = StyleSheet.create({
     borderColor: colors.text2,
     borderRadius: 8,
     height: 120,
-    marginBottom: 20
+    marginBottom: 15,
+    padding: 10
   },
   content: {
     display: 'flex',
@@ -47,12 +68,11 @@ const styles = StyleSheet.create({
   image: {
     width: 80,
     height: 80,
-    margin: 10,
-    borderRadius: 8
+    marginRight: 10,
+    borderRadius: 8,
+    resizeMode: 'cover'
   },
   text: {
-    marginTop: 10,
-    marginRight: 10,
     flex: 1,
   },
   title: {
@@ -66,13 +86,13 @@ const styles = StyleSheet.create({
     fontWeight: '400',
     fontSize: 14,
     color: colors.text2,
-    marginTop: 10    
+    marginTop: 5    
   },
   info: {
     //fontFamily: 'Monterrat',
     fontWeight: '500',
     fontSize: 14,
     color: colors.text2,
-    marginHorizontal: 10
+    marginVertical: 5
   }
 })

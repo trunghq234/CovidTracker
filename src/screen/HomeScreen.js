@@ -15,20 +15,19 @@ export default function HomeScreen() {
           <View style={styles.header}>
             <View style={styles.headerContent}>
               <Text style={styles.headerName}>Covid-19 Tracker</Text>
-              <Text style={styles.headerTitle}>Corona Virus Cases</Text>
-              
+              <CountrySelect />
               <Text style={styles.headerTime}>Last updated 1 hour ago</Text>
             </View>
           </View>
           <View style={styles.content}>
             <View style={styles.cards}>
               <View style={styles.cardsRow}>
-                <CasesDisplay title='COMFIRMED'></CasesDisplay>
-                <CasesDisplay title='ACTIVE'></CasesDisplay>
+                <CasesDisplay title='COMFIRMED' textColor={colors.primary}></CasesDisplay>
+                <CasesDisplay title='ACTIVE' textColor={colors.blue}></CasesDisplay>
               </View>
               <View style={styles.cardsRow}>
-                <CasesDisplay title='RECOVERED'></CasesDisplay>
-                <CasesDisplay title='DECASED'></CasesDisplay>
+                <CasesDisplay title='RECOVERED' textColor={colors.green}></CasesDisplay>
+                <CasesDisplay title='DECASED' textColor={colors.gray}></CasesDisplay>
               </View>
             </View>
             <View style={styles.map}>
@@ -75,21 +74,26 @@ const styles = StyleSheet.create({
   },
   content: {
     backgroundColor: colors.white,
-    flex: 1
+    flex: 1,
   },
   cards: {
     marginHorizontal: 30,
-    marginTop: -30
+    marginTop: -30,
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: "space-between",
   },
   cardsRow: {
     display: "flex",
-    flexDirection: "row",
-    justifyContent: "space-between",
-    marginBottom: 20
+    marginBottom: 20,
+    flexGrow: 1
   },
   map: {
     marginHorizontal: 30,
     marginTop: 10,
     marginBottom: 20
+  },
+  countryPicker: {
+    height: 30,
   }
 });

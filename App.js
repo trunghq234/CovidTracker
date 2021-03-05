@@ -5,6 +5,7 @@ import HomeScreen from './src/screen/HomeScreen';
 import NewsScreen from './src/screen/NewsScreen';
 import HealthScreen from './src/screen/HealthScreen';
 import InfoScreen from './src/screen/InfoScreen';
+import TestScreen from './src/screen/TestScreen';
 import 'react-native-gesture-handler';
 
 import { NavigationContainer } from '@react-navigation/native';
@@ -43,6 +44,9 @@ export default function App() {
             tabBarOptions={{
               activeTintColor: '#EA5569',
               inactiveTintColor: '#6F787F',
+              labelStyle: {
+                fontSize: 12
+              }
             }}
                      
           >
@@ -50,6 +54,7 @@ export default function App() {
             <Tab.Screen name="News" component={NewsScreen} />
             <Tab.Screen name="Health" component={HealthScreen} />
             <Tab.Screen name="Info" component={InfoScreen} />
+            <Tab.Screen name="Test" component={TestScreen} />
         </Tab.Navigator>
       </NavigationContainer>
     </SafeAreaView>
