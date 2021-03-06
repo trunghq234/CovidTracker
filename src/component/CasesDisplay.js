@@ -1,80 +1,22 @@
-import React, { useState, useEffect } from 'react'
-import { StyleSheet, Text, View, Button } from 'react-native'
-import colors from '../Colors'
-import AntDesign from 'react-native-vector-icons/AntDesign'
-import api from '../api';
+import React from 'react';
+import { StyleSheet, Text, View, Button } from 'react-native';
+import colors from '../Colors';
+import AntDesign from 'react-native-vector-icons/AntDesign';
 
-export default CasesDisplay = ({ title, textColor }) => {
-  const [casesNumber, setCasesNumber] = useState({});
-  const [casesView, setCasesView] = useState(0);
-  const [diff, setDiff] = useState(0);
-
-  async function fetchNumberOfCases(country) {
-    //country = 'VN';
-    // const { cases, recovered, deaths } = (
-    //   await api.get(country ? `countries/${country}` : '')
-    // );
-    
-    var requestOptions = {
-      method: 'GET',
-      redirect: 'follow'
-    };
-    fetch(`https://corona.lmao.ninja/v2/countries/${country}`, requestOptions)
-      .then(response => response.text())
-      .then(result => {
-        let obj = JSON.parse(result);
-        setCasesNumber({
-          cases: obj.cases,
-          todayCases: obj.todayCases,
-          recovered: obj.recovered,
-          todayRecovered: obj.todayRecovered,
-          deaths: obj.deaths,
-          todayDeaths: obj.todayDeaths
-        })
-      })
-      .catch(error => console.log('error', error));
-    //console.log(JSON.parse(result).cases)
-    // setCasesNumber({
-    //   cases: cases,
-    //   recovered: recovered,
-    //   deaths: deaths,
-    // });
-    switch (title) {
-      case 'COMFIRMED':
-        setCasesView(casesNumber.cases);
-        setDiff(casesNumber.todayCases);
-        break;
-      case 'ACTIVE':
-        setCasesView(casesNumber.cases - casesNumber.recovered);
-        setDiff(casesNumber.todayCases - casesNumber.todayRecovered);
-        break;
-      case 'RECOVERED':
-        setCasesView(casesNumber.recovered);
-        setDiff(casesNumber.todayRecovered);
-        break;
-      case 'DECASED':
-        setCasesView(casesNumber.deaths);
-        setDiff(casesNumber.todayDeaths);
-        break;
-      default:
-        break;
-    }
-  }
-  useEffect(() => {
-    fetchNumberOfCases('US');
-  }, []);
-
+export default CasesDisplay = ({ title, textColor, casesNum, casesDiff }) => {
   return (
     <View style={styles.container}>
       <Text style={styles.title}>{title}</Text>
       <View style={styles.numbers}>
         <Text style={[styles.numberOfCases, {color: textColor}]}>
-          { casesView }
+          { casesNum }
         </Text>
-        <AntDesign name={diff > 0 ? "arrowup" : "arrowdown"} color={textColor} size={14}/>
-        <Text style={[styles.numberOfChanges, {color: textColor}]}>
-          { Math.abs(diff) }
-        </Text>
+        <View style={{display: casesDiff === 0 ? 'none' : 'flex', flexDirection: 'row', alignItems: 'baseline'}}>
+          <AntDesign name={casesDiff > 0 ? "arrowup" : "arrowdown"} color={textColor} size={14}/>
+          <Text style={[styles.numberOfChanges, {color: textColor}]}>
+            { Math.abs(casesDiff) }
+          </Text>
+        </View>
       </View>
     </View>
   )
@@ -83,7 +25,6 @@ export default CasesDisplay = ({ title, textColor }) => {
 const styles = StyleSheet.create({
   container: {
     height: 150,
-    flexGrow: 1,
     backgroundColor: colors.white,
     borderRadius: 8,
     shadowColor: "#000",
@@ -94,7 +35,8 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.25,
     shadowRadius: 3.84,
     elevation: 5,
-    
+    width: '47%',
+    marginBottom: '6%'
   },
   title: {
     //fontFamily: 'Montserrat',
@@ -113,7 +55,8 @@ const styles = StyleSheet.create({
     //fontFamily: 'Montserrat',
     fontSize: 20,
     fontWeight: '600',
-    marginHorizontal: 10
+    marginLeft: 10,
+    marginRight: 5
   },
   numberOfChanges: {
     //fontFamily: 'Montserrat',

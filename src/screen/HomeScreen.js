@@ -1,44 +1,97 @@
-import React from 'react'
+import React, { Component } from 'react'
 import { StyleSheet, Text, View, ImageBackground, ScrollView } from 'react-native'
 import AffectedMap from '../component/AffectedMap';
 import CasesDisplay from '../component/CasesDisplay';
 import CountrySelect from '../component/CountrySelect';
 import colors from '../Colors';
 
-export default function HomeScreen() {
-  return (
-    <ScrollView showsVerticalScrollIndicator={false} style={{backgroundColor: colors.white}}>
-      <View style={styles.container}>
-        <ImageBackground 
-          source={require('../../assets/Background.png')} 
-          style={styles.image} >
-          <View style={styles.header}>
-            <View style={styles.headerContent}>
-              <Text style={styles.headerName}>Covid-19 Tracker</Text>
-              <CountrySelect />
-              <Text style={styles.headerTime}>Last updated 1 hour ago</Text>
-            </View>
-          </View>
-          <View style={styles.content}>
-            <View style={styles.cards}>
-              <View style={styles.cardsRow}>
-                <CasesDisplay title='COMFIRMED' textColor={colors.primary}></CasesDisplay>
-                <CasesDisplay title='ACTIVE' textColor={colors.blue}></CasesDisplay>
+export default class HomeScreen extends Component {
+  state = {
+    cases: {},
+    countryCode: ''
+  }
+  fetchNumberOfCases = (country) => {
+    var requestOptions = {
+      method: 'GET',
+      redirect: 'follow'
+    };
+    const url = country === 'GO' ? 'https://disease.sh/v3/covid-19/all' : `https://disease.sh/v3/covid-19/countries/${country}`;
+    fetch(url, requestOptions)
+      .then(response => response.text())
+      .then(result => {
+        let res = JSON.parse(result);
+        this.setState({
+          cases: {
+            confirmed: res.cases,
+            todayConfirmed: res.todayCases,
+            recovered: res.recovered,
+            todayRecovered: res.todayRecovered,
+            active: res.cases - res.recovered,
+            todayActive: res.todayCases - res.todayRecovered,
+            deaths: res.deaths,
+            todayDeaths: res.todayDeaths
+          }
+        })
+      })
+      .catch(error => console.log('error', error));
+  }
+  handleSelectCountry = (countryCode) => {
+    setCountryCode(countryCode);
+  }
+  componentDidMount() {
+    this.fetchNumberOfCases('VN');
+  }
+  render() {
+    return (
+      <ScrollView showsVerticalScrollIndicator={false} style={{backgroundColor: colors.white}}>
+        <View style={styles.container}>
+          <ImageBackground 
+            source={require('../../assets/Background.png')} 
+            style={styles.image} >
+            <View style={styles.header}>
+              <View style={styles.headerContent}>
+                <Text style={styles.headerName}>Covid-19 Tracker</Text>
+                
+                <Text style={styles.headerTime}>Last updated 1 hour ago</Text>
               </View>
-              <View style={styles.cardsRow}>
-                <CasesDisplay title='RECOVERED' textColor={colors.green}></CasesDisplay>
-                <CasesDisplay title='DECASED' textColor={colors.gray}></CasesDisplay>
+            </View>
+            <View style={styles.content}>
+              <View style={styles.cards}>
+                <CasesDisplay 
+                  title='COMFIRMED' 
+                  casesNum={this.state.cases.confirmed} 
+                  casesDiff={this.state.cases.todayConfirmed} 
+                  textColor={colors.primary}
+                />
+                <CasesDisplay 
+                  title='ACTIVE'
+                  casesNum={this.state.cases.active}
+                  casesDiff={this.state.cases.todayActive}
+                  textColor={colors.blue}
+                />
+                <CasesDisplay 
+                  title='RECOVERED' 
+                  casesNum={this.state.cases.recovered}
+                  casesDiff={this.state.cases.todayRecovered}
+                  textColor={colors.green}
+                />
+                <CasesDisplay 
+                  title='DECASED' 
+                  casesNum={this.state.cases.deaths}
+                  casesDiff={this.state.cases.todayDeaths}
+                  textColor={colors.gray}
+                />
+              </View>
+              <View style={styles.map}>
+                <AffectedMap style={{marginVertical: 20}}></AffectedMap>
               </View>
             </View>
-            <View style={styles.map}>
-              <AffectedMap style={{marginVertical: 20}}></AffectedMap>
-            </View>
-          </View>
-        </ImageBackground>
-      </View>
-    </ScrollView>
-    
-  ) 
+          </ImageBackground>
+        </View>
+      </ScrollView>
+    ) 
+  }
+
 }
 
 const styles = StyleSheet.create({
@@ -80,13 +133,9 @@ const styles = StyleSheet.create({
     marginHorizontal: 30,
     marginTop: -30,
     display: 'flex',
-    flexDirection: 'row',
-    justifyContent: "space-between",
-  },
-  cardsRow: {
-    display: "flex",
-    marginBottom: 20,
-    flexGrow: 1
+    flexWrap: 'wrap',
+    justifyContent: 'space-between',
+    flexDirection: 'row'
   },
   map: {
     marginHorizontal: 30,

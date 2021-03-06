@@ -1,14 +1,17 @@
-import React, { useEffect, useState } from 'react'
+import React, { Component } from 'react'
 import { StyleSheet, Text, View } from 'react-native'
 import { ScrollView } from 'react-native-gesture-handler'
 import News from '../component/News'
 import colors from '../Colors';
 import axios from 'axios';
+import SkeletonNews from '../component/SkeletonNews';
 
-export default function NewsScreen() {
-  const [newsArr, setNewsArr] = useState([]);
-
-  async function fetchNews() {
+export default class NewsScreen extends Component {
+  state = {
+    newsArr: [],
+    isLoading: true
+  }
+  fetchNews = () => {
     const options = {
       method: 'GET',
       url: `https://vaccovid-coronavirus-vaccine-and-treatment-tracker.p.rapidapi.com/api/news/get-vaccine-news/${Math.floor(Math.random()*5)}`,
@@ -17,28 +20,35 @@ export default function NewsScreen() {
         'x-rapidapi-host': 'vaccovid-coronavirus-vaccine-and-treatment-tracker.p.rapidapi.com'
       }
     };
-    
-    axios.request(options).then(function (response) {
-      setNewsArr(response.data.news);
-    }).catch(function (error) {
-      console.error(error);
-    });
+    axios.request(options)
+      .then(response => {
+        this.setState({
+          newsArr: response.data.news.slice(0, 10),
+          isLoading: false
+        })
+      })
+      .catch(error => {
+        console.error(error);
+      });
   }
 
-  useEffect(() => {
-    fetchNews();
-  }, []);
+  componentDidMount() {
+    this.fetchNews();
+  }
 
-  return (
-    <View style={styles.container}>
-      <ScrollView showsVerticalScrollIndicator={false} showsHorizontalScrollIndicator={false}>
-        <Text style={styles.title}>Lastest News</Text>
-        <View style={styles.content}>
-          { newsArr.map(news => <News news={news} key={news.news_id} />)  }
-        </View>
-      </ScrollView>
-    </View>
-  )
+  render() {
+    return (
+      <View style={styles.container}>
+        <ScrollView showsVerticalScrollIndicator={false} showsHorizontalScrollIndicator={false}>
+          <Text style={styles.title}>Lastest News</Text>
+          { this.state.isLoading ? <View><SkeletonNews /><SkeletonNews /><SkeletonNews /><SkeletonNews /><SkeletonNews /></View> : null }
+          <View style={styles.content}>
+            { this.state.newsArr.map(news => <News news={news} key={news.news_id} />)  }
+          </View>
+        </ScrollView>
+      </View>
+    );
+  }
 }
 
 const styles = StyleSheet.create({
