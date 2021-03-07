@@ -9,14 +9,14 @@ import PreventionsDisplay from '../component/PreventionsDisplay';
 export default class HomeScreen extends Component {
   state = {
     cases: {},
-    countryCode: ''
-  }
+    countryCode: 'VN'
+  };
   fetchNumberOfCases = (country) => {
     var requestOptions = {
       method: 'GET',
       redirect: 'follow'
     };
-    const url = country === 'GO' ? 'https://disease.sh/v3/covid-19/all' : `https://disease.sh/v3/covid-19/countries/${country}`;
+    const url = country === '' ? 'https://disease.sh/v3/covid-19/all' : `https://disease.sh/v3/covid-19/countries/${country}`;
     fetch(url, requestOptions)
       .then(response => response.text())
       .then(result => {
@@ -37,14 +37,20 @@ export default class HomeScreen extends Component {
       .catch(error => console.log('error', error));
   }
   handleSelectCountry = (countryCode) => {
-    setCountryCode(countryCode);
+    this.setState({
+      countryCode: countryCode
+    })
+    this.fetchNumberOfCases(countryCode);
   }
   componentDidMount() {
-    this.fetchNumberOfCases('GO');
+    this.fetchNumberOfCases(this.state.countryCode);
   }
   render() {
     return (
-      <ScrollView showsVerticalScrollIndicator={false} style={{backgroundColor: colors.white}}>
+      <ScrollView 
+        showsVerticalScrollIndicator={false} 
+        style={{backgroundColor: colors.white}}
+      >
         <View style={styles.container}>
           <ImageBackground 
             source={require('../../assets/Background.png')} 
@@ -52,8 +58,7 @@ export default class HomeScreen extends Component {
             <View style={styles.header}>
               <View style={styles.headerContent}>
                 <Text style={styles.headerName}>Covid-19 Tracker</Text>
-                
-                <Text style={styles.headerTime}>Last updated 1 hour ago</Text>
+                <CountrySelect />
               </View>
             </View>
             <View style={{ backgroundColor: colors.white}}>
