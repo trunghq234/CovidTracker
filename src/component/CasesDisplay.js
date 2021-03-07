@@ -1,7 +1,7 @@
 import React from 'react';
 import { StyleSheet, Text, View, Button } from 'react-native';
 import colors from '../Colors';
-import AntDesign from 'react-native-vector-icons/AntDesign';
+import Entypo from 'react-native-vector-icons/Entypo';
 
 export default CasesDisplay = ({ title, textColor, casesNum, casesDiff }) => {
   return (
@@ -9,12 +9,16 @@ export default CasesDisplay = ({ title, textColor, casesNum, casesDiff }) => {
       <Text style={styles.title}>{title}</Text>
       <View style={styles.numbers}>
         <Text style={[styles.numberOfCases, {color: textColor}]}>
-          { casesNum }
+          { new Intl.NumberFormat().format(casesNum) }
         </Text>
-        <View style={{display: casesDiff === 0 ? 'none' : 'flex', flexDirection: 'row', alignItems: 'baseline'}}>
-          <AntDesign name={casesDiff > 0 ? "arrowup" : "arrowdown"} color={textColor} size={14}/>
+        <View style={[ styles.changes, { display: casesDiff === 0 ? 'flex' : 'flex' }]}>
+          <Entypo 
+            name={casesDiff >= 0 ? "plus" : "minus"} 
+            color={textColor} 
+            size={16}
+          />
           <Text style={[styles.numberOfChanges, {color: textColor}]}>
-            { Math.abs(casesDiff) }
+            { new Intl.NumberFormat().format(Math.abs(casesDiff)) }
           </Text>
         </View>
       </View>
@@ -24,7 +28,7 @@ export default CasesDisplay = ({ title, textColor, casesNum, casesDiff }) => {
 
 const styles = StyleSheet.create({
   container: {
-    height: 150,
+    height: 120,
     backgroundColor: colors.white,
     borderRadius: 8,
     shadowColor: "#000",
@@ -36,40 +40,35 @@ const styles = StyleSheet.create({
     shadowRadius: 3.84,
     elevation: 5,
     width: '47%',
-    marginBottom: '6%'
+    marginBottom: '5%'
   },
   title: {
     //fontFamily: 'Montserrat',
     fontSize: 16,
     fontWeight: '600',
     color: colors.text2,
-    margin: 10,
-    marginBottom: 5
+    margin: 15,
+    marginBottom: 10
   },
   numbers: {
     display: 'flex',
-    flexDirection: 'row',
-    alignItems: 'baseline'
   },
   numberOfCases: {
     //fontFamily: 'Montserrat',
     fontSize: 20,
-    fontWeight: '600',
-    marginLeft: 10,
-    marginRight: 5
+    fontWeight: '700',
+    marginLeft: 15,
   },
   numberOfChanges: {
     //fontFamily: 'Montserrat',
-    fontSize: 16,
-    fontWeight: '500',
-    marginHorizontal: 2
+    fontSize: 18,
+    fontWeight: '600',
   },
-  chart: {
-    width: 120,
-    height: 80,
-    borderColor: '#000',
-    borderWidth: 0.5,
-    marginHorizontal: 10,
-    marginTop: 5
+  changes: {
+    flexDirection: 'row',
+    alignItems: 'baseline',
+    marginLeft: 15,
+    marginRight: 10,
+    marginVertical: 7
   }
 })

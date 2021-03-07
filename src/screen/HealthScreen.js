@@ -12,18 +12,26 @@ export default function HealthScreen() {
       <View style={styles.container}>
         <Text style={styles.title}>Health Tips</Text>
         <View style={styles.content}>
-          <View style={styles.row}>
-            <HealthTip title='Lorem ipsum dolor sit amet.' details={p}></HealthTip>
-            <HealthTip title='Lorem ipsum dolor sit amet.' details={p}></HealthTip>
-          </View>
-          <View style={styles.row}>
-            <HealthTip title='Lorem ipsum dolor sit amet.' details={p}></HealthTip>
-            <HealthTip title='Lorem ipsum dolor sit amet.' details={p}></HealthTip>
-          </View>
-          <View style={styles.row}>
-            <HealthTip title='Lorem ipsum dolor sit amet.' details={p}></HealthTip>
-            <HealthTip title='Lorem ipsum dolor sit amet.' details={p}></HealthTip>
-          </View>
+          <HealthTip 
+            title='Wear a mask' 
+            details='Wear a mask to help stop us from unknowingly spreading infectious droplets.'
+            imgSrc= { require('../../assets/image/preventions/WearMask.png') }
+          />
+          <HealthTip 
+            title='Wash your hands' 
+            details='Wash your hands often with soap for at least 20 seconds or use an alcohol-based hand sanitizer containing at least 60% alcohol.'
+            imgSrc= { require('../../assets/image/preventions/WashHands.png') }
+          />
+          <HealthTip 
+            title='Clean and disinfect surfaces and objects' 
+            details='Clean and disinfect frequently touched surfaces daily.'
+            imgSrc= { require('../../assets/image/preventions/CleanSurface.png') }
+          />
+          <HealthTip 
+            title='Wash your hands' 
+            details='Keeping 2 metres away from others when outside of your home.'
+            imgSrc= { require('../../assets/image/preventions/Distance.png') }
+          />
         </View>
       </View>
     </ScrollView>
@@ -38,17 +46,15 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 26, 
     fontWeight: '700',
-    color: colors.text,
+    color: colors.primary,
     marginTop: 20,
-    marginHorizontal: 30
+    marginHorizontal: 20
   },
   content: {
-    margin: 30
-  },
-  row: {
+    margin: 20,
     display: 'flex',
     flexDirection: 'row',
-    justifyContent: 'space-between',
-    marginBottom: 20
-  }
+    flexWrap: 'wrap',
+    justifyContent: 'space-between'
+  },
 })

@@ -59,12 +59,12 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 26, 
     fontWeight: '700',
-    color: colors.text,
+    color: colors.primary,
     marginVertical: 20,
-    marginHorizontal: 30
+    marginHorizontal: 20
   },
   content: {
     flex: 1,
-    marginHorizontal: 30,
+    marginHorizontal: 20,
   }
 })

@@ -1,9 +1,10 @@
 import React, { Component } from 'react'
-import { StyleSheet, Text, View, ImageBackground, ScrollView } from 'react-native'
-import AffectedMap from '../component/AffectedMap';
+import { StyleSheet, Text, View, ImageBackground, ScrollView, Image } from 'react-native'
+import SymptomsDisplay from '../component/SymptomsDisplay';
 import CasesDisplay from '../component/CasesDisplay';
 import CountrySelect from '../component/CountrySelect';
 import colors from '../Colors';
+import PreventionsDisplay from '../component/PreventionsDisplay';
 
 export default class HomeScreen extends Component {
   state = {
@@ -39,7 +40,7 @@ export default class HomeScreen extends Component {
     setCountryCode(countryCode);
   }
   componentDidMount() {
-    this.fetchNumberOfCases('VN');
+    this.fetchNumberOfCases('GO');
   }
   render() {
     return (
@@ -47,7 +48,7 @@ export default class HomeScreen extends Component {
         <View style={styles.container}>
           <ImageBackground 
             source={require('../../assets/Background.png')} 
-            style={styles.image} >
+            style={styles.imageBackground} >
             <View style={styles.header}>
               <View style={styles.headerContent}>
                 <Text style={styles.headerName}>Covid-19 Tracker</Text>
@@ -55,35 +56,38 @@ export default class HomeScreen extends Component {
                 <Text style={styles.headerTime}>Last updated 1 hour ago</Text>
               </View>
             </View>
-            <View style={styles.content}>
-              <View style={styles.cards}>
-                <CasesDisplay 
-                  title='COMFIRMED' 
-                  casesNum={this.state.cases.confirmed} 
-                  casesDiff={this.state.cases.todayConfirmed} 
-                  textColor={colors.primary}
-                />
-                <CasesDisplay 
-                  title='ACTIVE'
-                  casesNum={this.state.cases.active}
-                  casesDiff={this.state.cases.todayActive}
-                  textColor={colors.blue}
-                />
-                <CasesDisplay 
-                  title='RECOVERED' 
-                  casesNum={this.state.cases.recovered}
-                  casesDiff={this.state.cases.todayRecovered}
-                  textColor={colors.green}
-                />
-                <CasesDisplay 
-                  title='DECASED' 
-                  casesNum={this.state.cases.deaths}
-                  casesDiff={this.state.cases.todayDeaths}
-                  textColor={colors.gray}
-                />
-              </View>
-              <View style={styles.map}>
-                <AffectedMap style={{marginVertical: 20}}></AffectedMap>
+            <View style={{ backgroundColor: colors.white}}>
+              <View style={styles.content}>
+                <View style={styles.cards}>
+                  <CasesDisplay 
+                    title='COMFIRMED' 
+                    casesNum={this.state.cases.confirmed} 
+                    casesDiff={this.state.cases.todayConfirmed} 
+                    textColor={colors.primary}
+                  />
+                  <CasesDisplay 
+                    title='ACTIVE'
+                    casesNum={this.state.cases.active}
+                    casesDiff={this.state.cases.todayActive}
+                    textColor={colors.blue}
+                  />
+                  <CasesDisplay 
+                    title='RECOVERED' 
+                    casesNum={this.state.cases.recovered}
+                    casesDiff={this.state.cases.todayRecovered}
+                    textColor={colors.green}
+                  />
+                  <CasesDisplay 
+                    title='DECASED' 
+                    casesNum={this.state.cases.deaths}
+                    casesDiff={this.state.cases.todayDeaths}
+                    textColor={colors.gray}
+                  />
+                </View>
+                <Text style={styles.title}>Covid-19 Symptoms</Text>
+                <SymptomsDisplay />
+                <Text style={styles.title}>Covid-19 Preventions</Text>
+                <PreventionsDisplay />
               </View>
             </View>
           </ImageBackground>
@@ -98,11 +102,11 @@ const styles = StyleSheet.create({
   container: {
     flex: 1
   },
-  image: {
-    flex: 1
+  imageBackground: {
+    flex: 1,
   },
   header: {
-    padding: 10,
+    paddingTop: 10,
     marginBottom: 40,
     marginLeft: 20
   },
@@ -127,22 +131,22 @@ const styles = StyleSheet.create({
   },
   content: {
     backgroundColor: colors.white,
-    flex: 1,
+    display: 'flex',
+    marginHorizontal: 10,
+    marginBottom: 30
   },
   cards: {
-    marginHorizontal: 30,
     marginTop: -30,
     display: 'flex',
     flexWrap: 'wrap',
     justifyContent: 'space-between',
-    flexDirection: 'row'
+    flexDirection: 'row',
+    marginHorizontal: 10
   },
-  map: {
-    marginHorizontal: 30,
-    marginTop: 10,
-    marginBottom: 20
+  title: {
+    fontSize: 22,
+    color: colors.text,
+    fontWeight: '600',
+    margin: 10,
   },
-  countryPicker: {
-    height: 30,
-  }
 });

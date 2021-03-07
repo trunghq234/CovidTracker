@@ -90,7 +90,7 @@ const styles = StyleSheet.create({
   },
   info: {
     //fontFamily: 'Monterrat',
-    fontWeight: '500',
+    fontWeight: '600',
     fontSize: 14,
     color: colors.text2,
     marginVertical: 5

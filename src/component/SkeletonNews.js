@@ -38,7 +38,7 @@ export default SkeletonNews = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    marginHorizontal: 30,
+    marginHorizontal: 20,
     height: 100,
     marginBottom: 15,
     borderColor: colors.text2,
