@@ -14,7 +14,7 @@ export default class NewsScreen extends Component {
   fetchNews = () => {
     const options = {
       method: 'GET',
-      url: `https://vaccovid-coronavirus-vaccine-and-treatment-tracker.p.rapidapi.com/api/news/get-vaccine-news/${Math.floor(Math.random()*5)}`,
+      url: `https://vaccovid-coronavirus-vaccine-and-treatment-tracker.p.rapidapi.com/api/news/get-coronavirus-news/${Math.floor(Math.random()*5)}`,
       headers: {
         'x-rapidapi-key': '6b90b67309msh0bec3915bee832fp1bc7c5jsn453ebc92c115',
         'x-rapidapi-host': 'vaccovid-coronavirus-vaccine-and-treatment-tracker.p.rapidapi.com'
