@@ -1,6 +1,6 @@
 {
   "expo": {
-    "name": "CovidTracker",
+    "name": "Covid Tracker",
     "slug": "CovidTracker",
     "version": "1.0.0",
     "orientation": "portrait",
@@ -26,6 +26,8 @@
     },
     "web": {
       "favicon": "./assets/CovidTrackerLogo.png"
-    }
+    },
+    "description": "",
+    "githubUrl": "https://github.com/trunghuynh2304/CovidTracker"
   }
 }

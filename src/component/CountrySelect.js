@@ -3,7 +3,7 @@ import { View, StyleSheet } from 'react-native'
 import CountryPicker from 'react-native-country-picker-modal'
 import { DEFAULT_THEME } from 'react-native-country-picker-modal/lib/CountryTheme';
 import colors from '../Colors';
-import { CountryCode, Country } from '../../types';
+import { CountryCode, Country } from '../types';
 
 export default function CountrySelect({ selecteCountry }) {
   const [countryCode, setCountryCode] = useState('VN')
@@ -24,12 +24,11 @@ export default function CountrySelect({ selecteCountry }) {
     primaryColorVariant: '#333',
     backgroundColor: colors.text,
     onBackgroundTextColor: colors.white,
-    fontSize: 22,
-    fontWeight: '700',
+    fontSize: 20,
     filterPlaceholderTextColor: '#aaa',
     activeOpacity: 1,
     placeHolderTextColor: colors.white,
-    itemHeight: 45
+    itemHeight: 50
   }
   return (
     <View style={styles.container}>

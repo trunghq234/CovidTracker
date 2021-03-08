@@ -58,7 +58,7 @@ export default class HomeScreen extends Component {
             <View style={styles.header}>
               <View style={styles.headerContent}>
                 <Text style={styles.headerName}>Covid-19 Tracker</Text>
-                <CountrySelect />
+                <CountrySelect selecteCountry={this.handleSelectCountry} />
               </View>
             </View>
             <View style={{ backgroundColor: colors.white}}>
@@ -119,8 +119,8 @@ const styles = StyleSheet.create({
     marginTop: 10,
   },
   headerName: {
-    fontSize: 18,
-    fontWeight: '500',
+    fontSize: 20,
+    fontWeight: '700',
     color: colors.white,
   },
   headerTitle: {

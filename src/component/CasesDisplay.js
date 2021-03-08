@@ -2,6 +2,8 @@ import React from 'react';
 import { StyleSheet, Text, View, Button } from 'react-native';
 import colors from '../Colors';
 import Entypo from 'react-native-vector-icons/Entypo';
+import 'intl';
+import 'intl/locale-data/jsonp/en';
 
 export default CasesDisplay = ({ title, textColor, casesNum, casesDiff }) => {
   return (

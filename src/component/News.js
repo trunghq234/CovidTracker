@@ -38,8 +38,9 @@ export default function News({ news }) {
       <View style={styles.container}>
         <View style={styles.content}>
           <Image 
+            style={styles.image}
             source={{uri: news.urlToImage}}
-            style={styles.image}></Image>
+          />
           <View style={styles.text}>
             <Text numberOfLines={2} style={styles.title}>{ news.title }</Text>
             <Text numberOfLines={3} style={styles.preview}>{ news.content }</Text>
