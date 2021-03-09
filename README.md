@@ -1,4 +1,4 @@
-![](https://github.com/trunghuynh2304/CovidTracker/blob/master/assets/CovidTrackerLogo.png)
+![](https://github.com/trunghuynh2304/CovidTracker/blob/master/assets/CovidTrackerLogo%400.3x.png)
 # Covid Tracker - made with :heart: by :raised_hands: 
 
 **Covid Tracker** is a mobile app that provides worldwide information related to the Covid-19 pandemic.
@@ -9,7 +9,7 @@
 * Giving understanding of symptoms and preventions from Covid-19
 
 ## Screenshots
-![]()
+![](https://github.com/trunghuynh2304/CovidTracker/blob/master/screenshot/ss5.png)
 
 ## Demo
 [![runs with expo](https://img.shields.io/badge/Runs%20with%20Expo-000.svg?style=flat-square&logo=EXPO&labelColor=f3f3f3&logoColor=000)](https://expo.io/@trunghuynh/projects/CovidTracker)
