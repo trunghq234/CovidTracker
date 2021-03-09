@@ -28,7 +28,7 @@ export default function HealthScreen() {
             imgSrc= { require('../../assets/image/preventions/CleanSurface.png') }
           />
           <HealthTip 
-            title='Wash your hands' 
+            title='Keep distance' 
             details='Keeping 2 metres away from others when outside of your home.'
             imgSrc= { require('../../assets/image/preventions/Distance.png') }
           />

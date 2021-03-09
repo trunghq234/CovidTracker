@@ -16,11 +16,11 @@ export default function PreventionsDisplay() {
       </View>
       <View style={styles.shadowCard}>
         <Image style={styles.image} source={require('../../assets/image/preventions/CleanSurface.png')} />
-        <Text style={styles.title}>Trouble{"\n"}Breathing</Text>
+        <Text style={styles.title}>Clean{"\n"}Surface</Text>
       </View>
       <View style={styles.shadowCard}>
         <Image style={styles.image} source={require('../../assets/image/preventions/Distance.png')} />
-        <Text style={styles.title}>Sore Throat</Text>
+        <Text style={styles.title}>Keep distance</Text>
       </View>
     </ScrollView>
   )
